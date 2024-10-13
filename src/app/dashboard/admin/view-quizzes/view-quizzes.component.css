@@ -1,0 +1,22 @@
+.example-header-image {
+    background-image: url('../../../../assets/ideas.png');
+    background-size: contain;
+  }
+
+  .mat-raised-button.mat-primary
+/* .mat-flat-button.mat-success,
+.mat-fab.mat-success,
+/* .mat-mini-fab.mat-success */
+ {   color: #f0fff3;
+  background-color: #155724;
+}
+
+.activeClass {
+  color: white;
+  background-color: #155724;  /*warn*/
+}
+
+.InactiveClass {
+  color: white;
+  background-color:#f51606 ; /*primary*/
+}

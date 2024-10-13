@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span style="cursor: pointer;" routerLink="/" routerLinkActive="active">Exam Portal</span>
+      <span class="example-spacer"></span>
+
+      <a *ngIf="!isloggedIn" routerLink="login" routerLinkActive="active" mat-raised-button >Login</a>
+      <a  *ngIf="!isloggedIn" routerLink="create-user" routerLinkActive="active" mat-raised-button style="margin-left: 10px;" >Sign Up</a>
+      <!-- <a *ngIf="loginService.isLoggedIn()" (click)="logout()" routerLink="login" routerLinkActive="active" mat-raised-button >Logout</a> -->
+      <mat-icon *ngIf="isloggedIn && user" mat-button [matMenuTriggerFor]="menu">account_circle</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button *ngIf="isloggedIn && user "  mat-menu-item routerLink="/admin/profile"><mat-icon>badge</mat-icon><span>{{user.username}}</span></button>
+        <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+
+  
+    

@@ -1,0 +1,26 @@
+<mat-card class="" style="margin-top: 20px;" *ngFor="let q of quizzes">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{q.title}}</mat-card-title>
+    <mat-card-subtitle>{{q.category_category_id}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{q.description}}</p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <button style="margin-left: 10px;margin-top: 15px;" mat-raised-button color="primary" [routerLink]="'/admin/view-questions/'+q.qid+'/'+q.title">Questions</button>
+            <button style="margin-left: 20px;" mat-raised-button color="primary" >Attempts</button>
+            <button style="margin-left: 20px;" mat-raised-button color="primary" [routerLink]="'/admin/quiz/'+q.qid">Update</button>
+            <button style="margin-left: 20px;" mat-raised-button color="primary" (click)="deleteQuiz(q.qid)">Delete</button>
+            <button style="margin-left: 20px;" mat-raised-button color="primary">Total Questions: {{q.numberOfQuestions}}</button>
+            <button style="margin-left: 20px;" mat-raised-button color="primary">Max Marks: {{q.maxMarks}}</button>
+            <button style="margin-left: 20px;"   [disableRipple]="true" [ngClass]="q.active == false ? 'InactiveClass' : 'activeClass'"  mat-raised-button >{{q.active==false?'Inactive':'Active'}}</button>
+        </mat-card-actions>
+        <mat-divider></mat-divider>
+       
+</mat-card>
+<div class="container text-center" style="margin-top: 30px;">
+    <button routerLink="/admin/add-quiz" mat-raised-button color="primary">Add New Quiz</button>
+</div>
+

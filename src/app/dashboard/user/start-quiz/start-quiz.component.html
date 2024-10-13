@@ -1,0 +1,100 @@
+<div class="bootstrap-wrapper" *ngIf="!isSubmit">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-2">
+            <mat-card style="margin-top:48px;" class="text-center"><b>Instructions</b></mat-card>
+            <mat-card style="margin-top: 10px;" ><b>Do not switch tab otherwise test will get automatically submitted </b></mat-card>
+            <mat-card style="margin-top: 5px;" > <b>You are giving an online proctored test</b></mat-card>
+        </div>
+        <div class="col-md-8">
+            <ng-container *ngIf="questions">
+                <!-- <h1>{{questions[0].quiz.title}}</h1> -->
+                <mat-card>
+                    <h2>{{questions[0].quiz.title}}</h2>
+                </mat-card>
+            </ng-container>
+            <mat-card *ngFor="let q of questions; let i  = index" style="margin-top: 10px;">
+                <mat-card-content>
+                    <p><b>Q{{i+1}}.</b> <span style="margin-left: 10px;" [innerHTML]="q.content"></span></p>
+                    <mat-divider></mat-divider>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6" >
+                            <input type="radio"
+                           [name]="i.toString()"
+                            [value]="q.option1" 
+                            [(ngModel)]="q.givenAnswer"
+                            />
+                            {{q.option1}}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option2"
+                            [name]="i.toString()" 
+                            [(ngModel)]="q.givenAnswer"/>
+                            {{q.option2}}
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option3"
+                            [name]="i.toString()"
+                            [(ngModel)]="q.givenAnswer"/>
+                            {{q.option3}}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option4" 
+                            [name]="i.toString()"
+                            [(ngModel)]="q.givenAnswer"/>
+                            {{q.option4}}
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <div class="container text-center" style="margin-top: 20px; margin-bottom: 20px;" >
+                <button mat-raised-button color="primary" (click)="submitQuiz()" >Submit</button>
+            </div>
+        </div>
+        <div class="col-md-2"  >
+            <mat-card style="margin-top:48px;" class="text-center">Quiz Ends In <b> {{endIn}} Min : {{endsInSec}} sec</b></mat-card>
+            <mat-card style="margin-top: 10px; display: flex; justify-content: center;"  >
+                <!-- <div class="text-center" style="height: 50%; width:50%; background-color: blue;">TEct</div>
+                <mat-card-header class="text-center">
+                    Quiz end in {{endIn}} Min : {{endsInSec}} sec
+                </mat-card-header >  -->
+                <mat-card-content>
+                    
+                  
+            <mat-spinner mode="determinate" [value]="(timer/(this.questions.length*1*60))*100"></mat-spinner>
+        </mat-card-content>
+        </mat-card>
+        </div>
+
+        
+    </div>
+</div>
+</div>
+
+
+<div class="div" *ngIf="isSubmit" #content id="content">
+
+<mat-card style="height: 50%; width:50%">
+    
+    <mat-card-content class="text-center">
+       <h1>Thnanks for giving test</h1>
+       <h2 >You Scored : {{marksGot}}</h2>
+       <h2>Attempted : {{attempted}}</h2>
+       <h2>Correct Answers: {{correctAnswers}}</h2>
+       <h2>Wrong Answers : {{attempted-correctAnswers}}</h2>
+       
+
+    </mat-card-content>
+    <mat-card-actions class="text-center">
+        <button mat-raised-button color="primary" (click)="downloadResult()"> Print</button>
+        <button mat-raised-button color="primary" routerLink="/user-dashboard/0">Home</button>
+    </mat-card-actions>
+
+</mat-card>
+
+</div>
